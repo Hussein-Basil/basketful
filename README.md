@@ -1,1 +1,1 @@
-# This app is a final project of the CS50 Harvard course
+# This app is a final project for the CS50 Harvard course
