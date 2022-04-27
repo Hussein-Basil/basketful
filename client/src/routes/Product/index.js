@@ -17,7 +17,7 @@ const Product = () => {
     const [product, setProduct] = useState(null)
 
     useEffect(() => {
-        fetch('http://localhost:3000/products.json', {
+        fetch('/products.json', {
             headers: { 'Accept': 'application/json' }
         })
             .then(res => res.json())

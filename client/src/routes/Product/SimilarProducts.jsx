@@ -5,7 +5,7 @@ const SimilarProducts = ({ id }) => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:3000/products.json', {
+        fetch('/products.json', {
             headers: { 'Accept': 'application/json' }
         })
             .then(res => res.json())

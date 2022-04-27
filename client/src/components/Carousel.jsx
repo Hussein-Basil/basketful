@@ -64,7 +64,7 @@ export const CarouselItem = ({ width, title, description, image }) => {
             </Flex>
             <Image
                 src={image}
-                display={{ base: "none", lg: "image" }}
+                display={{ base: "none", lg: "flex" }}
                 objectFit="cover"
                 position={{ sm: "unset", lg: "absolute" }}
                 top="40px"
