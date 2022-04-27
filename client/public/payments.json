@@ -1,0 +1,20 @@
+{
+    "payments": [
+        {
+            "id": 1,
+            "order_id": 1,
+            "date": "2018-01-01",
+            "amount": 10000,
+            "currency": "IQD",
+            "provider": "Visa"
+        },
+        {
+            "id": 2,
+            "order_id": 2,
+            "date": "2018-01-01",
+            "amount": 10000,
+            "currency": "IQD",
+            "provider": "Visa"
+        }
+    ]
+}

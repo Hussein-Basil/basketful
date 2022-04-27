@@ -4,10 +4,12 @@ import { IoMdMenu } from 'react-icons/io';
 import { Link } from 'react-scroll';
 import React from "react";
 
-const MobileDrawer = () => {
+const MobileDrawer = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const btnRef = React.useRef(); return (
-        <Flex>
+    const btnRef = React.useRef()
+
+    return (
+        <Flex {...props}>
             <Button ref={btnRef} onClick={onOpen}>
                 <IoMdMenu size="26px" />
             </Button>

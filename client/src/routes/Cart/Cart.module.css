@@ -1,0 +1,9 @@
+.Table th,
+.Table td:not(:first-child) {
+  padding-left: 20px;
+}
+
+/* cancel borders between each row of the table */
+.Table tr td {
+  border-bottom: none;
+}
