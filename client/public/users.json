@@ -1,0 +1,154 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "Bret",
+            "email": "johndoe@example.com",
+            "first_name": "Leanne",
+            "last_name": "Graham",
+            "phone": "1-770-736-8031 x56442",
+            "wishlist": [
+                {
+                    "product_id": 1,
+                    "date_added": "2019-01-01"
+                },
+                {
+                    "product_id": 2,
+                    "date_added": "2019-01-01"
+                }
+            ],
+            "payment": [
+                {
+                    "payment_type": "credit",
+                    "provider": "Visa",
+                    "card_name": "Leanne Graham",
+                    "card_number": "XXXX-XXXX-XXXX-1234",
+                    "expiry_date": "12/20",
+                    "card_cvv": "123"
+                },
+                {
+                    "payment_type": "paypal",
+                    "provider": "Paypal",
+                    "card_name": "Leanne Graham",
+                    "card_number": "XXXX-XXXX-XXXX-1234",
+                    "expiry_date": "12/20",
+                    "card_cvv": "123"
+                }
+            ],
+            "address": [
+                {
+                    "address_line1": "Kulas Light",
+                    "address_line2": "Apt. 556",
+                    "city": "Basra",
+                    "postal_code": "92998-3874"
+                },
+                {
+                    "address_line1": "Kulas Light",
+                    "address_line2": "Apt. 556",
+                    "city": "Baghdad",
+                    "postal_code": "92998-3874"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "username": "Bret",
+            "email": "johndoe@example.com",
+            "first_name": "Leanne",
+            "last_name": "Graham",
+            "phone": "1-770-736-8031 x56442",
+            "wishlist": [
+                {
+                    "product_id": 1,
+                    "date_added": "2019-01-01"
+                },
+                {
+                    "product_id": 2,
+                    "date_added": "2019-01-01"
+                }
+            ],
+            "payment": [
+                {
+                    "payment_type": "credit",
+                    "provider": "Visa",
+                    "card_name": "Leanne Graham",
+                    "card_number": "XXXX-XXXX-XXXX-1234",
+                    "expiry_date": "12/20",
+                    "card_cvv": "123"
+                },
+                {
+                    "payment_type": "paypal",
+                    "provider": "Paypal",
+                    "card_name": "Leanne Graham",
+                    "card_number": "XXXX-XXXX-XXXX-1234",
+                    "expiry_date": "12/20",
+                    "card_cvv": "123"
+                }
+            ],
+            "address": [
+                {
+                    "address_line1": "Kulas Light",
+                    "address_line2": "Apt. 556",
+                    "city": "Basra",
+                    "postal_code": "92998-3874"
+                },
+                {
+                    "address_line1": "Kulas Light",
+                    "address_line2": "Apt. 556",
+                    "city": "Baghdad",
+                    "postal_code": "92998-3874"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "username": "Bret",
+            "email": "johndoe@example.com",
+            "first_name": "Leanne",
+            "last_name": "Graham",
+            "phone": "1-770-736-8031 x56442",
+            "wishlist": [
+                {
+                    "product_id": 1,
+                    "date_added": "2019-01-01"
+                },
+                {
+                    "product_id": 2,
+                    "date_added": "2019-01-01"
+                }
+            ],
+            "payment": [
+                {
+                    "payment_type": "credit",
+                    "provider": "Visa",
+                    "card_name": "Leanne Graham",
+                    "card_number": "XXXX-XXXX-XXXX-1234",
+                    "expiry_date": "12/20",
+                    "card_cvv": "123"
+                },
+                {
+                    "payment_type": "paypal",
+                    "provider": "Paypal",
+                    "card_name": "Leanne Graham",
+                    "card_number": "XXXX-XXXX-XXXX-1234",
+                    "expiry_date": "12/20",
+                    "card_cvv": "123"
+                }
+            ],
+            "address": [
+                {
+                    "address_line1": "Kulas Light",
+                    "address_line2": "Apt. 556",
+                    "city": "Basra",
+                    "postal_code": "92998-3874"
+                },
+                {
+                    "address_line1": "Kulas Light",
+                    "address_line2": "Apt. 556",
+                    "city": "Baghdad",
+                    "postal_code": "92998-3874"
+                }
+            ]
+        }
+    ]
+}
