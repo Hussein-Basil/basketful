@@ -13,20 +13,19 @@ const Profile = () => {
         }
     })
 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
+
     useEffect(() => {
-        if (!user.userID) return
-        fetch(`http://localhost:8000/api/user/${user.userID}/profile`)
+        if (!user._id) return
+        fetch(`http://localhost:8000/api/user/${user._id}`)
             .then(res => res.json())
             .then(data => {
                 if (data) {
-                    setProfileData({
-                        name: data.user.firstName + ' ' + data.user.lastName,
-                        username: data.user.username,
-                        email: data.user.email,
-                        image: data.user.image,
-                        store: data.store
-                    })
-
+                    setUsername(data.username)
+                    setEmail(data.email)
+                    setName(data.firstName + ' ' + data.lastName)
                 }
             })
     }, [user])
@@ -50,15 +49,15 @@ const Profile = () => {
                     <Flex flexDir="column" rowGap="10px" fontWeight="medium">
                         <Flex>
                             <Text>Username:</Text>
-                            <Text>{profileData.username}</Text>
+                            <Text>{username}</Text>
                         </Flex>
                         <Flex>
                             <Text>Name:</Text>
-                            <Text>{profileData.name}</Text>
+                            <Text>{name}</Text>
                         </Flex>
                         <Flex>
                             <Text>Email:</Text>
-                            <Text>{profileData.email}</Text>
+                            <Text>{email}</Text>
                         </Flex>
                     </Flex>
                     <Flex flexDir="column" w="200px" rowGap="10px">

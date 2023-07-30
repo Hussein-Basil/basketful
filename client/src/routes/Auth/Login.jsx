@@ -12,6 +12,7 @@ const Login = () => {
     const { status, setStatus, setUser } = useUser()
 
     useEffect(() => {
+        console.log(status)
         if (status === "loggedIn") {
             navigate("/")
         }
