@@ -20,13 +20,13 @@ const MobileDrawer = (props) => {
                 finalFocusRef={btnRef}
             >
                 <VStack alignItems="left">
-                    <Link>
+                    <Link to="/">
                         <Button variant="text">Home</Button>
                     </Link>
-                    <Link>
+                    <Link to="/wishlist">
                         <Button variant="text">Wish list</Button>
                     </Link>
-                    <Link>
+                    <Link to="/cart">
                         <Button variant="text">Cart</Button>
                     </Link>
                     <Button bg="blue.500" color="white">

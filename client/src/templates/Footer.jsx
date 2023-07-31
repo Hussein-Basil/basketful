@@ -26,21 +26,21 @@ const Footer = () => {
                 <Flex justifyContent="space-between">
                     <Flex flexDir="column" rowGap="5px">
                         <Heading as="h3" size="md" mb="10px">MAIN</Heading>
-                        <RouterLink to="/"><Link>Home</Link></RouterLink>
-                        <RouterLink to="/about"><Link>About Us</Link></RouterLink>
-                        <RouterLink to="/contact"><Link>Contact</Link></RouterLink>
+                        <RouterLink to="/">Home</RouterLink>
+                        <RouterLink to="/about">About Us</RouterLink>
+                        <RouterLink to="/contact">Contact</RouterLink>
                     </Flex>
                     <Flex flexDir="column" rowGap="5px">
                         <Heading as="h3" size="md" mb="10px">CATEGORIES</Heading>
-                        <RouterLink to="/category/electronics"><Link>Electronics</Link></RouterLink>
-                        <RouterLink to="/category/clothes"><Link>Clothes</Link></RouterLink>
-                        <RouterLink to="/category/accessories"><Link>Accessories</Link></RouterLink>
+                        <RouterLink to="/category/electronics">Electronics</RouterLink>
+                        <RouterLink to="/category/clothes">Clothes</RouterLink>
+                        <RouterLink to="/category/accessories">Accessories</RouterLink>
                     </Flex>
                     <Flex flexDir="column" rowGap="5px">
                         <Heading as="h3" size="md" mb="10px">HELP</Heading>
-                        <RouterLink to="/privacy-terms"><Link>Privacy terms</Link></RouterLink>
-                        <RouterLink to="/cutstomer-service"><Link>Customer Service</Link></RouterLink>
-                        <RouterLink to="/faq"><Link>FAQ</Link></RouterLink>
+                        <RouterLink to="/privacy-terms">Privacy terms</RouterLink>
+                        <RouterLink to="/cutstomer-service">Customer Service</RouterLink>
+                        <RouterLink to="/faq">FAQ</RouterLink>
                     </Flex>
                 </Flex>
                 <Flex justifyContent="space-between">

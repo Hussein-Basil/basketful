@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Flex,
@@ -13,33 +13,49 @@ import {
   HStack,
   Icon,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as Mail } from "../../assets/email.svg";
 import { useFormik } from "formik";
 
+import useAuth from "../../hooks/useAuth";
+
 const Login = () => {
+  const { setAuth, rememberMe, setRememberMe } = useAuth();
+  const location = useLocation();
+
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+      rememberMe: true,
     },
     onSubmit: (values) => {
+      console.log(values)
       fetch("http://localhost:8000/api/auth/login", {
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            email: values.email,
-            password: values.password
+          email: values.email,
+          password: values.password,
         }),
         method: "POST",
+        credentials: "include",
       })
         .then((response) => response.json())
-        .then((result) => alert(result.message))
-        .catch((error) => alert("error", error.message));
+        .then((result) => {
+          setAuth(result);
+          setRememberMe(values.rememberMe);
+          navigate("/", { replace: true, state: { from: location } });
+        })
+        .catch((error) => alert(error.message));
     },
   });
+
+  useEffect(() => {
+    localStorage.setItem("rememberMe", rememberMe);
+  }, [rememberMe]);
 
   return (
     <Flex flexDir="column" gap="20px" align="center">
@@ -87,6 +103,7 @@ const Login = () => {
               name="password"
               onChange={formik.handleChange}
               value={formik.values.password}
+              autoComplete="true"
               type="password"
               placeholder="Your password"
               bg="light.500"
@@ -101,7 +118,14 @@ const Login = () => {
             />
           </InputGroup>
           <Flex justify="space-between">
-            <Checkbox colorScheme="green" defaultChecked>
+            <Checkbox
+              colorScheme="green"
+              defaultChecked
+              value={formik.values.rememberMe}
+              onChange={formik.handleChange}
+              id="rememberMe"
+              name="rememberMe"
+            >
               <Text fontSize="14px">Remember me</Text>
             </Checkbox>
             <Link to="/forgot-password" fontSize="14px">
