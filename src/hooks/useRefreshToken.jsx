@@ -2,7 +2,7 @@ import axios from "../api/axios";
 import useAuth from "./useAuth";
 
 const useRefreshToken = () => {
-  // custom hook to refresh JWT access token 
+  // custom hook to refresh JWT access token
   // if expired or not saved in application memory
   const { setAuth } = useAuth();
 

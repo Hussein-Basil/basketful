@@ -3,20 +3,20 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./contexts/AuthContext";
 
-import Home from "./routes/Home/index";
-import Product from "./routes/Product/index";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
 import Layout from "./templates/Layout";
-import Login from "./routes/Auth/Login";
-import Register from "./routes/Auth/Register";
-import Address from "./routes/Auth/Address";
-import Payment from "./routes/Auth/Payment";
-import Cart from "./routes/Cart/index";
-import Checkout from "./routes/Checkout/index";
-import Wishlist from "./routes/Wishlist/index";
-import Profile from "./routes/Profile/index";
-import Category from "./routes/Category/index";
-import About from "./routes/About/index";
-import Contact from "./routes/Contact/index";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Address from "./pages/Address";
+import Payment from "./pages/Payment";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Wishlist from "./pages/Wishlist";
+import Profile from "./pages/Profile";
+import Category from "./pages/Category";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 import RequireAuth from "./components/RequireAuth";
 import PersistLogin from "./components/PersistLogin";
@@ -41,29 +41,32 @@ function App() {
         <ScrollToTop>
           <Layout>
             <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route exact path="/register" element={<Register />} />
+
               <Route element={<PersistLogin />}>
+                <Route path="/" element={<Home />} />
+
+                
                 <Route
                   element={
                     <RequireAuth
                       allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]}
                     />
                   }
-                >
-                  <Route path="/" element={<Home />} />
-                </Route>
+                ></Route>
+                <Route path="/product/:id" element={<Product />} />
+
+                <Route exact path="/register/address" element={<Address />} />
+                <Route exact path="/register/payment" element={<Payment />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/category/:id" element={<Category />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
               </Route>
-              <Route path="/product/:id" element={<Product />} />
-              <Route path="/login" element={<Login />} />
-              <Route exact path="/register" element={<Register />} />
-              <Route exact path="/register/address" element={<Address />} />
-              <Route exact path="/register/payment" element={<Payment />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/wishlist" element={<Wishlist />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/category/:id" element={<Category />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
             </Routes>
           </Layout>
         </ScrollToTop>

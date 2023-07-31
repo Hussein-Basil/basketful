@@ -1,9 +1,9 @@
 import React from 'react'
 import { Flex, Heading, Link, Icon } from '@chakra-ui/react'
-import { ReactComponent as Facebook } from '../assets/facebook.svg'
-import { ReactComponent as Twitter } from '../assets/twitter.svg'
-import { ReactComponent as Instagram } from '../assets/instagram.svg'
-import { ReactComponent as Linkedin } from '../assets/linkedin.svg'
+import { ReactComponent as Facebook } from '../assets/social/facebook.svg'
+import { ReactComponent as Twitter } from '../assets/social/twitter.svg'
+import { ReactComponent as Instagram } from '../assets/social/instagram.svg'
+import { ReactComponent as Linkedin } from '../assets/social/linkedin.svg'
 
 import { Link as RouterLink } from 'react-router-dom'
 
