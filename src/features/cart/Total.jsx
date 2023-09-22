@@ -18,7 +18,7 @@ const Total = ({ items }) => {
                 <Text>Subtotal</Text>
                 <Text>IQD{' '}
                     {!items.length ? 0 :
-                        items.map(item => item.price * item.quantity).reduce((a, b) => a + b).toLocaleString()
+                        items.map(item => item.product.price * item.quantity).reduce((a, b) => a + b).toLocaleString()
                     }
                 </Text>
             </Flex>
@@ -26,7 +26,7 @@ const Total = ({ items }) => {
                 <Text>Tax</Text>
                 <Text>IQD{' '}
                     {!items.length ? 0 :
-                        (items.map(item => item.price * item.quantity).reduce((a, b) => a + b) / 1000).toLocaleString()
+                        (items.map(item => item.product.price * item.quantity).reduce((a, b) => a + b) / 1000).toLocaleString()
                     }
                 </Text>
             </Flex>

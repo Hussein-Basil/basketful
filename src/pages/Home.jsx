@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Products } from "../features/product";
 import { Ad, Carousel, Features } from "../features/home";
-import Ramadan from "../assets/ramadan.svg";
+import DiscountsDesktop from "../assets/file_88.jpg";
+import DiscountsMobile from "../assets/file_87.jpg";
+import SalesDesktop from "../assets/IMG_1756.jpeg";
+import SalesMobile from "../assets/IMG_1755.jpeg";
 import axios from "../api/axios";
 
 const Home = () => {
@@ -16,16 +19,12 @@ const Home = () => {
       <Carousel
         items={[
           {
-            title: "Ramadan Kareem",
-            description:
-              "We wish you a happy fasting month with your family and loved ones",
-            image: Ramadan,
+            image: DiscountsDesktop,
+            mobileImage: DiscountsMobile
           },
           {
-            title: "Ramadan Kareem",
-            description:
-              "We wish you a happy fasting month with your family and loved ones",
-            image: Ramadan,
+            image: SalesDesktop,
+            mobileImage: SalesMobile,
           },
         ]}
       />
@@ -35,8 +34,8 @@ const Home = () => {
         text="Basketful is CS50's Graduation Project"
         link="/cs50-graduate-project"
       />
-      <Products title="Offers" items={products} />
-      <Products title="Featured" items={products} />
+      <Products title="Offers" items={products}  />
+      <Products title="Featured" items={products}  />
     </div>
   );
 };

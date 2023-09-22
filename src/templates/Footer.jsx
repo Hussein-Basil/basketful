@@ -23,7 +23,7 @@ const Footer = () => {
                 lg: "1024px",
                 xl: "1520px",
             }} mx="auto" flexDir="column" rowGap="45px">
-                <Flex justifyContent="space-between">
+                <Flex justifyContent="space-between" display={{ base: "none", lg: "flex"}}>
                     <Flex flexDir="column" rowGap="5px">
                         <Heading as="h3" size="md" mb="10px">MAIN</Heading>
                         <RouterLink to="/">Home</RouterLink>
@@ -43,7 +43,7 @@ const Footer = () => {
                         <RouterLink to="/faq">FAQ</RouterLink>
                     </Flex>
                 </Flex>
-                <Flex justifyContent="space-between">
+                <Flex justifyContent="space-between" flexDir={{ base: "column", lg: "row"}} gap="2rem">
                     {/* Social Links */}
                     <Flex flexDir="column" rowGap="10px">
                         <Heading as="h3" size="md">Follow us</Heading>

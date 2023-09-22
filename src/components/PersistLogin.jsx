@@ -1,10 +1,9 @@
-import { Outlet } from "react-router-dom";
-
 import { useState, useEffect } from "react";
 import useRefreshToken from "../hooks/useRefreshToken";
 import useAuth from "../hooks/useAuth";
+import LoadingPage from '../pages/LoadingPage';
 
-const PersistLogin = () => {
+const PersistLogin = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const refresh = useRefreshToken();
   const { auth, rememberMe } = useAuth();
@@ -22,13 +21,13 @@ const PersistLogin = () => {
     };
     !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
 
-    return () => isMounted = false;
+    return () => (isMounted = false);
   }, []);
 
   // if remember this device is not enabled, don't wait and load child routes
   // otherwise wait until access token is refreshed
   return (
-    <>{!rememberMe ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
+    <>{!rememberMe ? children : isLoading ? <LoadingPage /> : children}</>
   );
 };
 

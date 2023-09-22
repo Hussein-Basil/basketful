@@ -8,3 +8,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.categories-scorllable {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.categories-scorllable::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}

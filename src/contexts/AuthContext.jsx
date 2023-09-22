@@ -1,29 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { createContext } from "react";
+import PersistLogin from "../components/PersistLogin";
 
 const AuthContext = createContext({});
 
 export default AuthContext;
 
-export const AuthProvider = (props) => {
-  const [status, setStatus] = useState("fetching");
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [notifications, setNotification] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
   const [auth, setAuth] = useState({});
   const [rememberMe, setRememberMe] = useState(
     JSON.parse(localStorage.getItem("rememberMe")) || false
   );
 
   const value = {
-    status,
-    setStatus,
     user,
     setUser,
-    notifications,
-    setNotification,
-    cartItems,
-    setCartItems,
     auth,
     setAuth,
     rememberMe,
@@ -31,6 +23,8 @@ export const AuthProvider = (props) => {
   };
 
   return (
-    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
+    <AuthContext.Provider value={value}>
+      <PersistLogin>{children}</PersistLogin>
+    </AuthContext.Provider>
   );
 };

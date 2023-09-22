@@ -1,78 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { useSwipeable } from "react-swipeable";
 
-export const CarouselItem = ({ width, title, description, image }) => {
+export const CarouselItem = ({ image }) => {
   return (
-    <Box
+    <Image
       display="inline-flex"
-      height={{ base: "300px", lg: "600px" }}
-      maxHeight={{ base: "300px", lg: "600px" }}
-      bg="light.500"
-      style={{ width: width }}
-      flexDir="column"
-      position="relative"
-    >
-      <Flex
-        flexDir="column"
-        gap="35px"
-        zIndex={10}
-        position="absolute"
-        top={{ sm: "10%", md: "20%" }}
-        left={{ sm: "30px", md: "85px" }}
-        color="dark.500"
-      >
-        <Heading
-          fontSize={{ base: "28px", lg: "56px" }}
-          fontWeight="semibold"
-          _after={{
-            content: "''",
-            display: "block",
-            height: "7px",
-            width: {
-              base: "113px",
-              sm: "85px",
-            },
-            bg: "primary.500",
-            marginTop: { sm: "8px", md: "16px" },
-          }}
-        >
-          {title}
-        </Heading>
-        <Text
-          as="span"
-          fontSize={{ sm: "16px", md: "24px" }}
-          width={{ sm: "85%", md: "724px" }}
-          wordBreak="break-word"
-          height={[`${description.length > 30 ? "60px" : "40px"}`, "40px"]}
-          style={{
-            whiteSpace: "normal",
-            wordWrap: "break-word",
-          }}
-        >
-          {description}
-        </Text>
-        <Button
-          variant="primary"
-          mt="28px"
-          py="16px"
-          w={{ sm: "120px", md: "163px" }}
-          fontSize={{ sm: "16px", md: "20px" }}
-        >
-          View Now
-        </Button>
-      </Flex>
-      <Image
-        src={image}
-        display={{ base: "none", lg: "flex" }}
-        objectFit="cover"
-        position={{ sm: "unset", lg: "absolute" }}
-        top="40px"
-        right="190px"
-        h={{ sm: "70%", md: "496px" }}
-        w={{ sm: "70%", md: "413px" }}
-      />
-    </Box>
+      src={image}
+      width="100vw"
+      minHeight="200px"
+      objectFit="cover"
+    />
   );
 };
 
@@ -107,43 +53,43 @@ export const Carousel = ({ items }) => {
     onSwipedRight: () => updateIndex(activeIndex - 1),
   });
 
+  const responsiveImage = useBreakpointValue({
+    base: "mobileImage",
+    lg: "image",
+  });
+
   return (
     <Box
+      className="carousel-container"
       position="relative"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      overflow="hidden"
+      marginBottom="-8px"
       {...handlers}
     >
-      <Box overflow="hidden">
-        <Box
-          transform={`translateX(-${activeIndex * 100}%)`}
-          transition="transform 0.3s"
-          whiteSpace="nowrap"
-        >
-          {items.map((item, index) => {
-            return (
-              <CarouselItem
-                key={index}
-                title={item.title}
-                description={item.description}
-                image={item.image}
-                width="100%"
-              />
-            );
-          })}
-        </Box>
+      <Box
+        transform={`translateX(-${activeIndex * 100}%)`}
+        transition="transform 0.3s"
+        whiteSpace="nowrap"
+      >
+        {items.map((item, index) => {
+          return <CarouselItem key={index} image={item[responsiveImage]} />;
+        })}
       </Box>
       <Button
-        m={5}
+        className="carousel-control-left"
+        m={3}
         position="absolute"
         top="50%"
         transform="translateY(-100%)"
-        left="-85px"
+        left="0px"
         width="auto"
         p="16px"
         color="primary.500"
+        opacity="0.6"
         fontWeight="bold"
-        fontSize="18px"
+        fontSize="28px"
         transition="0.6s ease"
         borderRadius="3px 0 0 3px"
         userSelect="none"
@@ -155,19 +101,21 @@ export const Carousel = ({ items }) => {
         &#10094;
       </Button>
       <Button
-        m={5}
+        className="carousel-control-right"
+        m={3}
         position="absolute"
         top="50%"
         transform="translateY(-100%)"
-        right="-85px"
+        right="0"
         bg="none"
+        opacity="0.6"
         _active={{ bg: "none" }}
         _hover={{ bg: "none" }}
         width="auto"
         p="16px"
         color="primary.500"
         fontWeight="bold"
-        fontSize="18px"
+        fontSize="28px"
         transition="0.6s ease"
         borderRadius="0 3px 3px 0"
         userSelect="none"
@@ -176,12 +124,12 @@ export const Carousel = ({ items }) => {
         &#10095;
       </Button>
       <Flex
+        className="pagination"
         justifyContent="center"
         position="absolute"
         bottom={{ sm: "-6px", md: "13px" }}
         left="50%"
         transform="translateX(-50%)"
-        mb={2}
         gap="5px"
       >
         {items.map((item, index) => {
@@ -203,6 +151,7 @@ export const Carousel = ({ items }) => {
                 w="12px"
                 bg={index === activeIndex ? "primary.500" : "primary.100"}
                 borderRadius="50%"
+                marginBottom="12px"
                 display="inline-block"
                 transition="background-color 0.3s ease"
               />

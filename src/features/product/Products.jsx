@@ -11,10 +11,13 @@ const Products = ({ title, items, ...props }) => {
       py="2em"
       // ml={{ sm: "158px", lg: "0" }}
       mx="auto"
+      px={{ base: "1rem", lg: 0}}
       w="100%"
+      overflow="hidden"
+      gap="1rem"
       {...props}
     >
-      <Flex alignItems="center" justify="space-between">
+      <Flex alignItems="center" justify="space-between" w="100%">
         <Heading
           as="h1"
           fontSize={{ base: "24px", lg: "36px" }}
@@ -24,8 +27,14 @@ const Products = ({ title, items, ...props }) => {
         </Heading>
         <Link to="">See All</Link>
       </Flex>
-      <Flex position="relative" columnGap={{ sm: "12px", lg: "78px" }}>
-        {items.slice(slideIndex, slideIndex + 4).map((item, index) => (
+      <Flex 
+      position="relative" 
+      justifyContent="space-between" 
+      gap="1rem"
+      overflowX="scroll"
+      className="categories-scorllable"
+      >
+        {items.map((item, index) => (
           <ProductItem key={index} {...item} />
         ))}
         <Button
@@ -83,4 +92,4 @@ const Products = ({ title, items, ...props }) => {
   );
 };
 
-export default Products
+export default Products;

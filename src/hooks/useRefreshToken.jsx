@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 const useRefreshToken = () => {
   // custom hook to refresh JWT access token
   // if expired or not saved in application memory
-  const { setAuth } = useAuth();
+  const { setAuth, setUser } = useAuth();
 
   const refresh = async () => {
     const response = await axios.get("/api/auth/refresh", {
@@ -17,6 +17,7 @@ const useRefreshToken = () => {
         accessToken: response.data.accessToken,
       };
     });
+    setUser(response.data.user)
     return response.data.accessToken;
   };
   return refresh;

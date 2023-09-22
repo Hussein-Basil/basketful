@@ -12,14 +12,14 @@ import {
   HStack,
   Icon,
 } from "@chakra-ui/react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { ReactComponent as Mail } from "../assets/email.svg";
 import { useFormik } from "formik";
 import axios from "../api/axios";
 import useAuth from "../hooks/useAuth";
 
 const Login = () => {
-  const { setAuth, rememberMe, setRememberMe } = useAuth();
+  const { auth, setAuth, setUser, rememberMe, setRememberMe } = useAuth();
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -33,9 +33,13 @@ const Login = () => {
       axios
         .post("/api/auth/login", values, { withCredentials: true })
         .then((result) => {
-          setAuth(result.data);
+          setAuth({
+            accessToken: result.data.accessToken,
+            roles: result.data.roles,
+          });
+          setUser(result.data.user);
           setRememberMe(values.rememberMe);
-          navigate("/", { replace: true, state: { from: location } });
+          navigate(location.state?.from || -1);
         })
         .catch((error) => alert(error.message));
     },
@@ -43,7 +47,10 @@ const Login = () => {
 
   useEffect(() => {
     localStorage.setItem("rememberMe", rememberMe);
+    console.log(location);
   }, [rememberMe]);
+
+  if (auth?.accessToken) return <Navigate to={"/"} />;
 
   return (
     <Flex flexDir="column" gap="20px" align="center">

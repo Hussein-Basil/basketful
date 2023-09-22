@@ -2,10 +2,11 @@ import axios from "../api/axios";
 import useAuth from "./useAuth";
 
 const useLogout = () => {
-  const { setAuth } = useAuth();
+  const { setAuth, setUser } = useAuth();
 
   const logout = async () => {
     setAuth({});
+    setUser({});
     try {
       await axios.delete("/api/auth/logout", {
         withCredentials: true,

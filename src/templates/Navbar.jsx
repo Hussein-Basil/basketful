@@ -19,15 +19,14 @@ import { MobileDrawer } from "../features/navbar";
 import { ReactComponent as Logo } from "../logo.svg";
 
 import useAuth from "../hooks/useAuth";
-import useLogout from "../hooks/useLogout";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const logout = useLogout();
-  const { auth } = useAuth();
+  const { auth, user } = useAuth();
 
   const categories = [
-    [<Icon as={Home} fill="dark.500" w="25px" h="25px" />, "/"],
+    [<Icon as={Home} fill="white" w="25px" h="25px" />, "/"],
+    ["Clothes", "/category/clothes"],
     ["Clothes", "/category/clothes"],
     ["Shoes", "/category/shoes"],
     ["Accessories", "/category/accessories"],
@@ -40,16 +39,11 @@ const Navbar = () => {
     ["Food", "/category/food"],
   ];
 
-  const signOut = async () => {
-    await logout();
-    navigate("/login");
-  };
-
   return (
     <Flex alignSelf="stretch" flexDir="column">
       <Flex
         w="100%"
-        py="36px"
+        py={{ base: "18px", lg: "36px" }}
         bg="light.100"
         borderBottom="1px"
         borderColor="rgba(0, 0, 0, 0.1)"
@@ -59,10 +53,14 @@ const Navbar = () => {
           justify="space-between"
           align="center"
           w={{
-            sm: "320px",
+            base: "100vw",
             md: "768px",
             lg: "1024px",
             xl: "1520px",
+          }}
+          px={{
+            base: "2rem",
+            md: 0
           }}
           maxW="1920px"
         >
@@ -127,13 +125,13 @@ const Navbar = () => {
               _active={{ bg: "light.100" }}
               p="0"
               onClick={() =>
-                auth?.accessToken ? signOut() : navigate("/login")
+                auth?.accessToken ? navigate("/profile") : navigate("/login")
               }
             >
               <Icon h={10} w={10} mr="14px" as={Person} fill="dark.500" />
               <Box textAlign="left">
                 <Text fontSize="0.625em" color="primary.500">
-                  {auth?.accessToken ? "LOG OUT" : "SIGN IN"}
+                  {auth?.accessToken ? "PROFILE" : "SIGN IN"}
                 </Text>
                 <Text fontSize="1.125em">Account</Text>
               </Box>
@@ -149,7 +147,9 @@ const Navbar = () => {
               <Icon h={10} w={10} mr="14px" as={Cart} fill="dark.500" />
               <Box textAlign="left">
                 <Text fontSize="0.625em" color="primary.500">
-                  NO ITEMS
+                  {user.cart?.length
+                    ? user.cart?.length + " ITEMS"
+                    : "NO ITEMS"}
                 </Text>
                 <Text fontSize="1.125em">Cart</Text>
               </Box>
@@ -164,24 +164,28 @@ const Navbar = () => {
       <Flex
         className="categories"
         alignItems="center"
-        borderBottom="1px"
-        borderColor="rgba(0,0,0,0.05)"
-        h="60px"
-        overflow="hidden"
         position="relative"
+        overflow="hidden"
       >
         <Flex
-          w={{
-            sm: "320px",
+          className="categories-scorllable"
+          maxW={{
+            base: "100vw",
             md: "768px",
             lg: "1024px",
             xl: "1520px",
           }}
           mx="auto"
+          width="100%"
           align="center"
-          overflow="hidden"
           justify="space-between"
           gap="1.5em"
+          bg="primary.500"
+          color="white"
+          fontSize={{ base: "14px", md: "16px"}}
+          fontWeight="medium"
+          paddingX="2rem"
+          overflow="scroll"
         >
           {categories.map(([category, path], index) => (
             <GridItem

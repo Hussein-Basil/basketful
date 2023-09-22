@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import { AuthProvider } from "./contexts/AuthContext";
 
 import Home from "./pages/Home";
 import Product from "./pages/Product";
@@ -17,60 +15,42 @@ import Profile from "./pages/Profile";
 import Category from "./pages/Category";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Dashboard from "./pages/admin/Dashboard";
+import Users from "./pages/admin/Users";
+import Store from "./pages/Store";
 
 import RequireAuth from "./components/RequireAuth";
-import PersistLogin from "./components/PersistLogin";
-
-const ScrollToTop = ({ children }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  return children;
-};
-
-const ROLES = {
-  User: "user",
-  Editor: "editor",
-  Admin: "admin",
-};
+import AdminLayout from "./templates/AdminLayout";
 
 function App() {
   return (
-    <Router forceRefresh={true}>
-      <AuthProvider>
-        <ScrollToTop>
-          <Layout>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route exact path="/register" element={<Register />} />
-
-              <Route element={<PersistLogin />}>
-                <Route path="/" element={<Home />} />
-
-                
-                <Route
-                  element={
-                    <RequireAuth
-                      allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]}
-                    />
-                  }
-                ></Route>
-                <Route path="/product/:id" element={<Product />} />
-
-                <Route exact path="/register/address" element={<Address />} />
-                <Route exact path="/register/payment" element={<Payment />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/wishlist" element={<Wishlist />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/category/:id" element={<Category />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-              </Route>
-            </Routes>
-          </Layout>
-        </ScrollToTop>
-      </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="users" element={<Users />} />
+          <Route path="*" element={<p>Not found</p>} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/cart" element={<Cart />} />
+          </Route>
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/store/:id" element={<Store />} />
+          <Route exact path="/register/address" element={<Address />} />
+          <Route exact path="/register/payment" element={<Payment />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/category/:id" element={<Category />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/*" element={<p>Error</p>} />
+        </Route>
+      </Routes>
     </Router>
   );
 }

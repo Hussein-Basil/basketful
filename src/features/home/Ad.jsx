@@ -6,30 +6,33 @@ const Ad = ({ text, link }) => {
     const navigate = useNavigate()
     return (
         <Flex
-            alignItems={{ sm: "start", lg: "center" }}
+            display={{ base: "none", lg: "flex"}}
+            alignItems="center"
             justifyContent="space-between"
-            flexDir={{ base: "column", lg: "row" }}
-            h="150px"
-            py="20px"
-            px={{ base: "20px", lg: "60px" }}
+            py="2rem"
+            px={{ base: "1.25rem", lg: "3rem", xl: "4rem" }}
             bg="dark.500"
             color="light.500"
+            gap="2rem"
         >
             <Heading
                 as="h1"
-                fontSize={{ base: "20px", lg: "42px" }}
+                fontSize={{ base: "18px", md: "28px", xl: "42px" }}
+                fontWeight="semibold"
             >
                 {text}
             </Heading>
             <Button
-                bg="primary.500"
-                px={{ base: "20px", lg: "40px" }}
-                height={{ base: "34px", lg: "66px" }}
-                fontSize={{ base: "16px", lg: "22px" }}
-                fontWeight="normal"
-                onClick={() => navigate(link)}
+              bg="primary.500"
+              color="light.100"
+              fontSize={{ base: "16px", lg: "20px" }}
+              fontWeight="semibold"
+              py="14px"
+              px="18px"
+              flexShrink={0}
+              onClick={() => navigate(link)}
             >
-                Learn More
+              Learn More
             </Button>
         </Flex>
     )
