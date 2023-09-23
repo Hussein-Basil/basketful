@@ -6,10 +6,11 @@ const Users = () => {
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
-      fetch("http://localhost:8000/api/user").then((res) => res.json()),
+      fetch("https://basketful.onrender.com/api/user").then((res) =>
+        res.json()
+      ),
   });
 
-  
   return (
     <section>
       {users?.map((user) => (
