@@ -5,6 +5,7 @@ const theme = extendTheme({
         primary: {
             100: "#84d9b1",
             500: "#2cbf6c",
+            700: "#2b9158"
         },
         dark: {
             100: "#707070",

@@ -9,10 +9,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.categories-scorllable {
+.categories-scrollable {
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;  /* Firefox */
 }
-.categories-scorllable::-webkit-scrollbar { 
+.categories-scrollable::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }

@@ -1,19 +1,41 @@
 import React from "react";
-import { Flex, Image, Button, Text } from "@chakra-ui/react";
+import { Flex, Image, Button, Text, Skeleton } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const ProductItem = ({ name, price, images, _id: id }) => {
+const ProductItem = ({ name, price, images, isSkeleton, _id: id }) => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  if (isSkeleton) {
+    return (
+    <Flex 
+      as={Skeleton}
+      minW="243px"
+      flex={1}
+      h={{ base: "350px", lg: "497px" }}
+    >
+    </Flex>)
+  }
+
   return (
-    <Link to={`/product/${id}`}>
-      <Flex
-        flexDir="column"
-        w={{ base: "327px", lg: "320px" }}
-        h={{ base: "497px", lg: "497px" }}
-        borderColor="rgba(0,0,0,0.15)"
-        borderWidth="1px"
-        overflow="hidden"
+    <Flex
+      // maxW={{ base: "243px", lg: "320px" }}
+      minW="243px"
+      flex={1}
+      h={{ base: "497px", lg: "497px" }}
+      borderColor="rgba(0,0,0,0.15)"
+      borderWidth="1px"
+      overflow="hidden"
+    >
+      <Link
+        to={`/product/${id}`}
+        style={{
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+        bg="red"
       >
         <Image
           display="block"
@@ -27,22 +49,28 @@ const ProductItem = ({ name, price, images, _id: id }) => {
           bgRepeat="no-repeat"
         />
         <Flex
-          h="100%"
-          mx="8px"
-          mb="20px"
-          px="9px"
-          flexDir="column"
-          justifyContent="space-between"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            height: "100%",
+            width: "100%",
+            maxWidth: "100%",
+            padding: "0 16px 20px 16px",
+          }}
         >
           <Text
             as="h3"
-            fontSize={{ sm: "20px", lg: "18px" }}
+            fontSize="14px"
             fontWeight="medium"
           >
             {name}
           </Text>
-          <Flex justifyContent="space-between" alignItems="center">
-            <Text fontSize="24px" fontWeight="semibold">
+          <Flex
+            style={{ justifyContent: "space-between", width: "100%" }}
+            alignItems="center"
+          >
+            <Text fontSize="18px" fontWeight="semibold">
               {price.toLocaleString()}
             </Text>
             <Button
@@ -62,8 +90,8 @@ const ProductItem = ({ name, price, images, _id: id }) => {
             </Button>
           </Flex>
         </Flex>
-      </Flex>
-    </Link>
+      </Link>
+    </Flex>
   );
 };
 

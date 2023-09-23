@@ -9,24 +9,31 @@ import {
   Input,
   InputGroup,
   Text,
+  Image,
+  IconButton,
+  InputRightElement,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as Cart } from "../assets/cart.svg";
+import { ReactComponent as WishListIcon } from "../assets/wishlist.svg";
 import { ReactComponent as Home } from "../assets/home.svg";
-import { ReactComponent as Person } from "../assets/person.svg";
+
 import { MobileDrawer } from "../features/navbar";
 import { ReactComponent as Logo } from "../logo.svg";
+import searchImage from "../assets/search.png";
 
 import useAuth from "../hooks/useAuth";
+import AccountModal from "../features/navbar/AccountModal";
+import CartModal from "../features/navbar/CartModal";
+import { SearchIcon } from "@chakra-ui/icons";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { auth, user } = useAuth();
+  const { user } = useAuth();
 
   const categories = [
     [<Icon as={Home} fill="white" w="25px" h="25px" />, "/"],
-    ["Clothes", "/category/clothes"],
     ["Clothes", "/category/clothes"],
     ["Shoes", "/category/shoes"],
     ["Accessories", "/category/accessories"],
@@ -40,151 +47,131 @@ const Navbar = () => {
   ];
 
   return (
-    <Flex alignSelf="stretch" flexDir="column">
+    <Flex
+      alignSelf="stretch"
+      flexDir="column"
+      width={{ base: "100%", xl: "1520px" }}
+      mx="auto"
+    >
       <Flex
-        w="100%"
-        py={{ base: "18px", lg: "36px" }}
+        width={{ base: "100%", xl: "1520px" }}
+        py={{ base: "18px", lg: "24px" }}
         bg="light.100"
         borderBottom="1px"
         borderColor="rgba(0, 0, 0, 0.1)"
-        justify="center"
+        justify="space-between"
+        align="center"
+        px={{ base: "1rem", lg: "2rem" }}
       >
-        <Flex
-          justify="space-between"
-          align="center"
-          w={{
-            base: "100vw",
-            md: "768px",
-            lg: "1024px",
-            xl: "1520px",
-          }}
-          px={{
-            base: "2rem",
-            md: 0
-          }}
-          maxW="1920px"
+        <MobileDrawer display={{ base: "flex", md: "none" }} />
+        <Link to="/" className="logo">
+          <Heading fontSize="3xl">Basketful</Heading>
+        </Link>
+        <InputGroup
+          className="search"
+          w="auto"
+          mx="2rem"
+          display={{ base: "none", lg: "flex" }}
+          flex={1}
+          border="1px"
+          borderColor="border.300"
+          borderRadius="5px"
         >
-          {/* Logo */}
-          <Link to="/">
-            <HStack>
-              <Icon
-                as={Logo}
-                height="40px"
-                w="60px"
-                fill="primary.500"
-                mx="-15px"
-              />
-              <Heading fontSize="3xl">Basketful</Heading>
-            </HStack>
-          </Link>
-          {/* Search Bar */}
-          <InputGroup
-            w="auto"
-            display={{ base: "none", lg: "flex" }}
-            border="1px"
-            borderColor="border.300"
+          <Input
+            border="none"
+            borderRadius="5px"
+            bg="light.500"
+            placeholder="Search for products..."
+            fontSize="14px"
+            // w={{ lg: "320px", xl: "765px" }}
+            _focus={{
+              border: "1px",
+              borderColor: "primary.500",
+            }}
+          />
+          <InputRightElement pointerEvents="none">
+            <SearchIcon />
+          </InputRightElement>
+        </InputGroup>
+        <HStack
+          as="nav"
+          spacing="20px"
+          display={{ base: "none", md: "flex" }}
+        >
+          <AccountModal />
+          <Button
+            className="wishlist"
+            bg="light.100"
+            _hover={{
+              bg: "light.100",
+              color: "primary.500",
+              fill: "primary.500",
+            }}
+            _active={{ bg: "light.100" }}
+            p="0"
+            onClick={() => navigate("/wishlist")}
           >
-            {/* Select Button to Choose Category */}
-            <Button
-              bg="light.500"
-              borderRight="1px"
-              borderColor="border.300"
-              fontSize="0.75em"
-            >
-              All Categories
-            </Button>
-            <Input
-              border="none"
-              borderRadius="0"
-              bg="light.500"
-              w={{ lg: "320px", xl: "765px" }}
-              _focus={{
-                border: "1px",
-                borderColor: "primary.500",
-              }}
-            />
-            <Button
-              bg="primary.500"
-              color="light.100"
-              fontSize="0.75em"
-              fontWeight="bold"
-            >
-              Search
-            </Button>
-          </InputGroup>
-          {/* CTA (Account + Cart) */}
-          <HStack
-            as="nav"
-            spacing="20px"
-            display={{ base: "none", md: "flex" }}
-          >
-            {/* Account */}
-            <Button
-              bg="light.100"
-              _hover={{ bg: "light.100" }}
-              _active={{ bg: "light.100" }}
-              p="0"
-              onClick={() =>
-                auth?.accessToken ? navigate("/profile") : navigate("/login")
-              }
-            >
-              <Icon h={10} w={10} mr="14px" as={Person} fill="dark.500" />
-              <Box textAlign="left">
-                <Text fontSize="0.625em" color="primary.500">
-                  {auth?.accessToken ? "PROFILE" : "SIGN IN"}
-                </Text>
-                <Text fontSize="1.125em">Account</Text>
-              </Box>
-            </Button>
-            {/* Cart */}
-            <Button
-              bg="light.100"
-              _hover={{ bg: "light.100" }}
-              _active={{ bg: "light.100" }}
-              p="0"
-              onClick={() => navigate("/cart")}
-            >
-              <Icon h={10} w={10} mr="14px" as={Cart} fill="dark.500" />
-              <Box textAlign="left">
-                <Text fontSize="0.625em" color="primary.500">
-                  {user.cart?.length
-                    ? user.cart?.length + " ITEMS"
-                    : "NO ITEMS"}
-                </Text>
-                <Text fontSize="1.125em">Cart</Text>
-              </Box>
-            </Button>
-          </HStack>
-          {/* For Mobiles */}
-          <HStack display={{ base: "flex", md: "none" }}>
-            <MobileDrawer />
-          </HStack>
-        </Flex>
+            <Icon h={7} w={7} mr="8px" as={WishListIcon} />
+            <Text textAlign="left" fontSize="16px">
+              Wishlist
+            </Text>
+          </Button>
+          <CartModal />
+S
+        </HStack>
+
+        <Button
+          display={{ base: "inline-flex", md: "none" }}
+          bg="light.100"
+          _hover={{ bg: "light.100", cursor: "pointer" }}
+          _active={{ bg: "light.100" }}
+          p="0"
+          onClick={() => navigate("/cart")}
+          fill="dark.500"
+          mr="14px"
+          ml="auto"
+        >
+          <Image src={searchImage} h={6} w={6} />
+        </Button>
+
+        {/* Cart */}
+        <IconButton
+          display={{ base: "inline-flex", md: "none" }}
+          bg="light.100"
+          _hover={{ bg: "light.100", cursor: "pointer" }}
+          _active={{ bg: "light.100" }}
+          p="0"
+          onClick={() => navigate("/cart")}
+          as={Cart}
+          fill="dark.500"
+          h={6}
+          w={6}
+          mr="14px"
+        />
       </Flex>
       <Flex
         className="categories"
+        display={{ base: "none", lg: "flex" }}
         alignItems="center"
         position="relative"
         overflow="hidden"
       >
         <Flex
-          className="categories-scorllable"
+          className="categories-scrollable"
           maxW={{
-            base: "100vw",
-            md: "768px",
-            lg: "1024px",
+            base: "100%",
             xl: "1520px",
           }}
           mx="auto"
           width="100%"
           align="center"
           justify="space-between"
+          bg="primary.700"
           gap="1.5em"
-          bg="primary.500"
           color="white"
-          fontSize={{ base: "14px", md: "16px"}}
+          fontSize="14px"
           fontWeight="medium"
-          paddingX="2rem"
+          px="2rem"
           overflow="scroll"
         >
           {categories.map(([category, path], index) => (

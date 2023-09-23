@@ -4,18 +4,23 @@ import {
   Button,
   Flex,
   Heading,
+  Icon,
   Image,
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useSwipeable } from "react-swipeable";
 
+import { ReactComponent as LeftArrow } from "../../assets/arrow-dark-left.svg";
+import { ReactComponent as RightArrow } from "../../assets/arrow-dark-right.svg";
+
 export const CarouselItem = ({ image }) => {
   return (
     <Image
       display="inline-flex"
       src={image}
-      width="100vw"
+      w="100%"
+      maxW="100vw"
       minHeight="200px"
       objectFit="cover"
     />
@@ -98,7 +103,7 @@ export const Carousel = ({ items }) => {
         _hover={{ bg: "none" }}
         onClick={() => updateIndex(activeIndex - 1)}
       >
-        &#10094;
+        <Icon as={LeftArrow} h={10} w='auto' />
       </Button>
       <Button
         className="carousel-control-right"
@@ -121,7 +126,7 @@ export const Carousel = ({ items }) => {
         userSelect="none"
         onClick={() => updateIndex(activeIndex + 1)}
       >
-        &#10095;
+        <Icon as={RightArrow} h={10} w='auto' />
       </Button>
       <Flex
         className="pagination"

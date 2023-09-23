@@ -11,7 +11,6 @@ const Cart = () => {
   useEffect(() => {
     axiosPrivate.get("/api/user/cart").then((res) => {
       setItems(res.data.cart)
-      console.log(res.data.cart);
   });
   }, [])
 
@@ -28,11 +27,11 @@ const Cart = () => {
   }
 
   return (
-    <Flex flexDir="column" gap="3em">
+    <Flex flexDir="column" gap="3em" mt="2rem">
       <Heading>Review your cart</Heading>
-      <Flex justify="space-between" align="start">
+      <Flex justify="space-between" align="start" gap="3rem">
         <CartTable items={items} setItems={setItems} />
-        <Flex w="368px" flexDir="column" gap="4em">
+        <Flex w="368px" flexDir="column" gap="4em" flexGrow={0}>
           <Total items={items} />
           <DiscountForm />
         </Flex>

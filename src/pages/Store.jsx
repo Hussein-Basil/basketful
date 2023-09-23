@@ -12,7 +12,7 @@ const Store = () => {
   } = useQuery({
     queryKey: ["store"],
     queryFn: () =>
-      fetch(`https://basketful.onrender.com/api/store/${params.id}`).then((res) =>
+      fetch(`http://localhost:8000/api/store/${params.id}`).then((res) =>
         res.json()
       ),
   });

@@ -29,6 +29,7 @@ const DrawerExample = ({
         placement={placement}
         onClose={onClose}
         finalFocusRef={btnRef}
+        
       >
         <DrawerOverlay />
         <DrawerContent alignItems="center">

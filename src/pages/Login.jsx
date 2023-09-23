@@ -19,7 +19,7 @@ import axios from "../api/axios";
 import useAuth from "../hooks/useAuth";
 
 const Login = () => {
-  const { auth, setAuth, setUser, rememberMe, setRememberMe } = useAuth();
+  const { auth, setAuth, setUser, setRememberMe } = useAuth();
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -38,17 +38,13 @@ const Login = () => {
             roles: result.data.roles,
           });
           setUser(result.data.user);
-          setRememberMe(values.rememberMe);
+          localStorage.setItem("rememberMe", true);
+          setRememberMe(true);
           navigate(location.state?.from || -1);
         })
         .catch((error) => alert(error.message));
     },
   });
-
-  useEffect(() => {
-    localStorage.setItem("rememberMe", rememberMe);
-    console.log(location);
-  }, [rememberMe]);
 
   if (auth?.accessToken) return <Navigate to={"/"} />;
 
